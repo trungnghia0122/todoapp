@@ -1,0 +1,152 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  text-align: center;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.enter-todo-box {
+  width: 1000px;
+}
+
+.add-button {
+  background: lightblue;
+  border: none;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.add-button:hover {
+  border-color: black;
+  background-color: white;
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  width: 200px;
+  height: auto;
+  border-radius: 5px;
+  border: 0.5px black solid;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-box {
+  width: 1080px;
+}
+
+.list-item {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between;
+  align-items: center; /* Center items vertically */
+  margin-bottom: 10px; /* Space between list items */
+  padding-top: 15px; /* Add padding for better appearance */
+  padding-bottom: 15px;
+  background-color: #f9f9f9; /* Optional: background color */
+  border: 1px solid #ddd; /* Optional: border */
+  border-radius: 5px; /* Optional: rounded corners */
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding-bottom: 80px;
+  padding-top: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  border-radius: 10px;
+}
+
+.confirm-button {
+  padding: 10px;
+  background-color: lightblue;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.confirm-button:hover {
+  background-color: white;
+  border-color: black;
+  cursor: pointer;
+}
+
+.blur {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+.edit-header {
+  margin-bottom: 40px;
+}
+
+ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.edit-button {
+  padding: 12px;
+  background-color: tan;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.edit-button:hover {
+  background-color: white;
+  border-color: black;
+  cursor: pointer;
+}
+
+.delete-button {
+  padding: 12px;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s;
+  border: 1px solid transparent;
+}
+
+.delete-button:hover {
+  background-color: white;
+  border-color: black;
+  cursor: pointer;
+}
+
+.edit-delete-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+h1 {
+  font-weight: 200;
+}
