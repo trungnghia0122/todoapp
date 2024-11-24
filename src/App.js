@@ -1,8 +1,11 @@
 import "./App.css"
 import { useState } from "react"
+import { MdModeEdit } from "react-icons/md"
+import { FaTrashAlt } from "react-icons/fa"
 
 export default function App() {
   const [todos, setToDos] = useState([])
+  const [completed, setCompleted] = useState([])
   const [currentTodo, setCurrentTodo] = useState("")
   const [isEditActive, setIsEditActive] = useState(false)
   const [todoToEdit, setTodoToEdit] = useState(null)
@@ -27,8 +30,20 @@ export default function App() {
     setIsEditActive(true)
   }
 
+  function handleComplete(index) {
+    setCompleted([...completed, todos[index]])
+    handleDelete(index)
+  }
+
+  function handleCompleteDelete(indexToRemove) {
+    const newCompletedList = completed.filter(
+      (_, index) => index !== indexToRemove
+    )
+    setCompleted(newCompletedList)
+  }
+
   return (
-    <>
+    <div className='container'>
       <div className={`App ${isEditActive ? "blur" : ""}`}>
         <h1>To Do List</h1>
         <div>
@@ -48,7 +63,14 @@ export default function App() {
             <ol className='list'>
               {todos.map((todo, index) => (
                 <div key={index} className='list-item'>
-                  <div>
+                  <div className='checkbox-container'>
+                    <input
+                      className='checkbox'
+                      type='checkbox'
+                      onClick={() => {
+                        handleComplete(index)
+                      }}
+                    />
                     <li>{todo}</li>
                   </div>
 
@@ -57,13 +79,13 @@ export default function App() {
                       className='edit-button'
                       onClick={() => handleEdit(todo, index)}
                     >
-                      Edit
+                      <MdModeEdit />
                     </button>
                     <button
                       className='delete-button'
                       onClick={() => handleDelete(index)}
                     >
-                      Delete
+                      <FaTrashAlt />
                     </button>
                   </div>
                 </div>
@@ -72,11 +94,31 @@ export default function App() {
           </div>
         </div>
       </div>
+      <div style={{ paddingTop: "80px" }} className={`App`}>
+        <h1>Completed:</h1>
+
+        <div className='list-box'>
+          <ol className='list'>
+            {completed.map((todo, index) => (
+              <div key={index} className='list-item'>
+                <li>{todo}</li>
+
+                <button
+                  className='delete-button'
+                  onClick={() => handleCompleteDelete(index)}
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
+            ))}
+          </ol>
+        </div>
+      </div>
       {isEditActive && (
         <>
           <div className='modal'>
             <h1 className='edit-header'>Edit Current Todo:</h1>
-            <div>
+            <div className='modal-text'>
               <input
                 type='text'
                 value={todoToEdit ? todoToEdit.text : ""}
@@ -100,6 +142,6 @@ export default function App() {
           </div>
         </>
       )}
-    </>
+    </div>
   )
 }
