@@ -5,7 +5,6 @@ import { FaTrashAlt } from "react-icons/fa"
 
 export default function App() {
   const [todos, setToDos] = useState([])
-  const [completed, setCompleted] = useState([])
   const [currentTodo, setCurrentTodo] = useState("")
   const [isEditActive, setIsEditActive] = useState(false)
   const [todoToEdit, setTodoToEdit] = useState(null)
@@ -30,18 +29,6 @@ export default function App() {
     setIsEditActive(true)
   }
 
-  function handleComplete(index) {
-    setCompleted([...completed, todos[index]])
-    handleDelete(index)
-  }
-
-  function handleCompleteDelete(indexToRemove) {
-    const newCompletedList = completed.filter(
-      (_, index) => index !== indexToRemove
-    )
-    setCompleted(newCompletedList)
-  }
-
   return (
     <div className='container'>
       <div className={`App ${isEditActive ? "blur" : ""}`}>
@@ -55,7 +42,10 @@ export default function App() {
               onChange={(event) => setCurrentTodo(event.target.value)}
               value={currentTodo}
             />
-            <button onClick={handleClick} className='add-button'>
+            <button
+              onClick={isEditActive ? null : handleClick}
+              className='add-button'
+            >
               +
             </button>
           </div>
@@ -64,26 +54,22 @@ export default function App() {
               {todos.map((todo, index) => (
                 <div key={index} className='list-item'>
                   <div className='checkbox-container'>
-                    <input
-                      className='checkbox'
-                      type='checkbox'
-                      onClick={() => {
-                        handleComplete(index)
-                      }}
-                    />
+                    <input className='checkbox' type='checkbox' />
                     <li>{todo}</li>
                   </div>
 
                   <div className='edit-delete-container'>
                     <button
                       className='edit-button'
-                      onClick={() => handleEdit(todo, index)}
+                      onClick={
+                        isEditActive ? null : () => handleEdit(todo, index)
+                      }
                     >
                       <MdModeEdit />
                     </button>
                     <button
                       className='delete-button'
-                      onClick={() => handleDelete(index)}
+                      onClick={isEditActive ? null : () => handleDelete(index)}
                     >
                       <FaTrashAlt />
                     </button>
@@ -94,26 +80,7 @@ export default function App() {
           </div>
         </div>
       </div>
-      <div style={{ paddingTop: "80px" }} className={`App`}>
-        <h1>Completed:</h1>
 
-        <div className='list-box'>
-          <ol className='list'>
-            {completed.map((todo, index) => (
-              <div key={index} className='list-item'>
-                <li>{todo}</li>
-
-                <button
-                  className='delete-button'
-                  onClick={() => handleCompleteDelete(index)}
-                >
-                  <FaTrashAlt />
-                </button>
-              </div>
-            ))}
-          </ol>
-        </div>
-      </div>
       {isEditActive && (
         <>
           <div className='modal'>
